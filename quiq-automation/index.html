@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Quiq Automation</title>
+    <title>Quiq Ticketer</title>
     <link rel="stylesheet" href="css/general.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/nav.css">
@@ -14,7 +14,7 @@
 
 <body>
     <header>
-        <h1 id="header">Quiq TeamDynamix Automation</h1>
+        <h1 id="header">Quiq Ticketer Program</h1>
         <a href="../index.html">BSC Projects</a>
     </header>
     <nav>
@@ -23,80 +23,134 @@
         <h3 class="nav-heading">Introduction</h3>
         <a class="nav-link" href="#technologies">Technologies</a>
         <a class="nav-link" href="#setup">Setup</a>
-        <h3 class="nav-heading">History</h3>
-        <a class="nav-link" href="#liveengage">LiveEngage</a>
+        <h3 class="nav-heading">Prerequisties</h3>
+        <a class="nav-link" href="#concepts">Concepts</a>
         <h3 class="nav-heading">Overview</h3>
-        <a class="nav-link" href="#root">Root</a>
+        <a class="nav-link" href="#controller">Controller</a>
+        <a class="nav-link" href="#executing">Executing</a>
         <a class="nav-link" href="#errors">Errors</a>
+        <a class="nav-link" href="#logging">Logging</a>
         <a class="nav-link" href="#debugging">Debugging</a>
         <h3 class="nav-heading">Creating the Ticket</h3>
         <a class="nav-link" href="#building">Building</a>
         <h3 class="nav-heading">Classes</h3>
         <a class="nav-link" href="#application">Application</a>
         <h3 class="nav-heading">External Resources</h3>
-        <a class="nav-link" href="https://api.teamdynamix.com/TDWebApi/" target="_blank">TeamDynamix Web API</a>
-        <a class="nav-link" href="https://momentjs.com/" target="_blank">Moment.js</a>
-        <a class="nav-link" href="https://nodejs.org/en/" target="_blank">Node.js</a>
+        <a class="nav-link" href="https://td.byui.edu/TDWebApi/" target="_blank">TeamDynamix Web API</a>
+        <a class="nav-link" href="https://start.spring.io/" target="_blank">Spring Initializr</a>
+        <a class="nav-link" href="https://gradle.org/install/" target="_blank">Gradle</a>
         <a class="nav-link" href="https://byui.goquiq.com/api/docs" target="_blank">Quiq API</a>
+        <a class="nav-link" href="https://www.jetbrains.com/idea/" target="_blank">IntelliJ IDEA</a>
+        <a class="nav-link" href="https://devcenter.heroku.com/articles/heroku-cli" target="_blank">Heroku</a>
     </nav>
     <main>
         <h1 class="content-heading">Introduction</h1>
         <hr>
         <h2 class="content-section" id="technologies">Technologies</h2>
-        <p>The Quiq Automation is just a server with barely any client side content. The client side is only used for
-            debugging. Everything happens on the server.</p>
-        <p>The server is written in Node.js</a>. All
-            the code is stored on <a href="https://github.com/" target="_blank">Github</a> and then deployed on <a
+        <p>The Quiq Ticketer program is a Java web server that utilizes the <a href="https://spring.io/guides/gs/spring-boot/" target="_blank">Spring Boot</a> framework.
+            The Spring Boot framework was chosen because of its simplicity and ease of use for initializing web servers.</p>
+        <p>The build tool used for this program is <a href="https://gradle.org/" target="_blank">Gradle</a>. Gradle was chosen over 
+            <a href="https://maven.apache.org/" target="_blank">Maven</a> as the build tool because of its simplicity of use and since 
+            it generally builds projects faster than Maven.</p> <p>The code is stored on <a href="https://github.com/" target="_blank">Github</a> and then deployed on <a
                 href="https://heroku.com" target="_blank">Heroku</a>.</p>
         <h2 class="content-section" id="setup">Setup</h2>
         <p>In order to work on this project, You will need to install a few things:</p>
         <ul>
-            <li>A Text Editor of your choice</li>
-            <li><a href="https://git-scm.com/" target="_blank">Git</a></li>
-            <li><a href="https://nodejs.org/en/" target="_blank">Node.js</a></li>
+            <li><a href="https://www.jetbrains.com/idea/" target="_blank">IntelliJ Ultimate</a> 
+                (apply for a <a href="https://www.jetbrains.com/community/education/#students" target="_blank">free educational license</a> as a student)</li>
+            <li><a href="https://git-scm.com/downloads" target="_blank">Git</a></li>
+            <li><a href="https://www.oracle.com/java/technologies/java-archive-javase10-downloads.html" target="_blank">Java 10 JDK</a> (or newer)</li>
+            <li><a href="https://gradle.org/install/" target="_blank">Gradle</a> (follow the tutorial)</li>
+            <li><a href="https://devcenter.heroku.com/articles/heroku-cli" target="_blank">Heroku CLI</a></li>
+            <li>Environment variables (ask other employees about necessary <code>env vars</code> for this program)</li>
+            <li><a href="https://www.postman.com/downloads/" target="_blank">Postman</a> (very helpful for testing purposes)</li>
         </ul>
         <p>Once you have those things, you will need to add yourself as a collaborator to the project on Github and then
-            you can clone it onto your local machine. From there you can do whatever you need to do.</p>
-        <h1 class="content-heading">History</h1>
+            you can clone it onto your local machine. From there you can do whatever you need to do. <b>Make sure to put your proposed changes on a separate branch!</b></p>
+        <h1 class="content-heading">Prerequisties</h1>
         <hr>
-        <h2 class="content-section" id="liveengage">LiveEngage</h2>
-        <p>When we had LiveEngage, our previous Live Chat software, a program was created to automatically make tickets
-            based on a live chat engagment. This program was run every morning for the day prior.</p>
-        <p>When we switched to our new software, Quiq, the managers wanted the same/similar process to take effect.
-            Although Quiq doesn't have the same capabilites as LiveEngage, they do have web hooks which allowed us to
-            have similar functionality as beforehand.</p>
-        <p class="tip">For more information on webhooks, you can refer to the Quiq documentation, or here: <a
-                href="https://sendgrid.com/blog/webhook-vs-api-whats-difference/" target="_blank">Webhook vs API</a>.
-        </p>
+        <h2 class="content-section" id="concepts">Concepts</h2>
+        <p>Before proceeding to the inner workings of the program, review the following concepts in case you are unfamiliar with them.</p>
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/Java_%28programming_language%29" target="_blank">Java programming</a> 
+                (especially the <a href="https://en.wikipedia.org/wiki/Java_%28programming_language%29#Execution_system" target="_blank">execution system</a> section)</li> 
+                <li><a href="https://en.wikipedia.org/wiki/Object-oriented_programming" target="_blank">Object-Orientated Programming</a> (OOP)</li> 
+            <li><a href="https://en.wikipedia.org/wiki/Representational_state_transfer" target="_blank">REST architecture</a></li> 
+            <li><a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller" target="_blank">MVC architecture</a></li> 
+            <li><a href="https://en.wikipedia.org/wiki/Webhook" target="_blank">Webhooks</a></li> 
+            <li><a href="https://gitimmersion.com/lab_01.html" target="_blank">Git</a> (tutorial/labs)</li> 
+            <li><a href="https://en.wikipedia.org/wiki/Test-driven_development" target="_blank">Test Driven Development</a>  (TDD)</li> 
+            <li><a href="https://www.tutorialspoint.com/java/java_multithreading.htm" target="_blank">Multithreading in Java</a></li>
+            <li><a href="https://en.wikipedia.org/wiki/JSON" target="_blank">JSON</a></li> 
+            <li><a href="https://en.wikipedia.org/wiki/Application_programming_interface" target="_blank">Application Programming Interface</a> (API)</li> 
+            <li><a href="https://en.wikipedia.org/wiki/Continuous_delivery" target="_blank">Continuous Delivery</a></li>
+            <li><a href="https://en.wikipedia.org/wiki/Software_framework" target="_blank">Software Frameworks</a></li> 
+            <li><a href="https://en.wikipedia.org/wiki/Unix_time" target="_blank">Unix time</a></li> 
+        </ul>
         <h1 class="content-heading">Overview</h1>
         <hr>
-        <h2 class="content-section" id="root">Root</h2>
-        <p>The server is set up so that whenever a POST request gets sent to the server, it will process it the way we
-            want. There isn't a specific reason why it is set up like that compared to an endpoint. If we need this
-            server to do something more, we can move this process to another endpoint, but for now it's fine.</p>
-        <p>Once the root gets the appropriate request, it checks to make sure it is from Quiq and the BSC was the person
-            who closed the chat. This is so that if someone were to send a bogus request to the server, it would not be
-            processed and added to TD.</p>
+        <h2 class="content-section" id="controller">Ticketer Controller</h2>
+        <p>The <code>TicketerController</code> class behaves as the controller from the 
+            <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller" target="_blank">MVC</a> architecture.
+             The Java annotation <code>@PostMapping("/")</code> denotes that the <code>postRequest()</code> function listens for <code>POST</code>
+             web traffic coming from the default route (i.e. <code>"/"</code>).</p> 
+        <p class="tip">For clarity, the model includes classes that manipulate data (i.e. <code>QuiqParser</code> and <code>TicketHandler</code> classes). 
+            The view is simply the returned string (i.e. <code>"Thanks"</code> or <code>"No Thanks"</code>).</p>
+        <p>Once recieved, the <code>POST</code> request is authenticated by checking the value of the secret Quiq header token.</p>
+        <p>After authenticating, a new thread is created to asynchronously run the program.</p>
+        <p class="tip">
+            Quiq has a timeout limit. If that limit is reached, Quiq will retry the request with an 
+            exponentional back off. If the program ran synchronously, then there is a risk the Quiq timeout limit would be reached. 
+            This is why it is necessary to execute the program asynchronously (via a thread).
+            See the <a href="https://developers.goquiq.com/api/docs#section/Webhooks-Overview" target="_blank">Quiq Webhooks Overview</a>
+            for more information about how Quiq handles errors.
+        </p>
+        <p>The program's flow of execution:</p>
+        <ul>
+            <li>Authentication with TeamDynamix (login)</li>
+            <li>Parsing the <code>QuiqConversationData</code> object into a <code>TeamDynamixData</code> object (via the <code>QuiqParser</code> class)</li>
+            <li>Building the TeamDynamix ticket from the <code>TeamDynamixData</code> object via the <code>TicketHandler</code> class</li>
+            <li>Creating the ticket in TeamDynamix</li>
+        </ul>
+        <h2 class="content-section" id="execution">Running vs. Executing the Program</h2>
+        <p>Running and executing the program are <b>NOT</b> the same thing. Running the program means the program will start <i>listening</i> for web traffic. 
+            Executing the program means to <i>send data</i> to the endpoint that the program is listening on.</p>
+        <p>The program can be <i>ran</i> in several different ways:</p>
+        <ul>
+            <li>Running the <code>.jar</code> file from the command line 
+                <p class="tip">Execute the following command: <code>java -jar &lt;path-to-jar&gt;</code>. 
+                    The .jar file is typically found in the <code>build/libs</code> directory.</p></li>
+            <li>Running the <code>TicketerApplication</code> in IntelliJ</li>
+        </ul>
+        <p>The program can be <i>executed</i> in several different ways:</p>
+        <ul>
+            <li>Executing the program from the command line
+                <p class="tip">Use the <a href="https://www.tutorialspoint.com/unix_commands/curl.htm" target="_blank">curl</a> command.
+                (i.e. <code>curl -X POST localhost:8080/</code>)</p></li>
+            <li>Execute the program via <a href="https://www.postman.com/" target="_blank">Postman</a>
+            <p class="tip">This is the preferred method since it is much easier to specify the <code>POST</code> body.</p></li>
+        </ul>
         <h2 class="content-section" id="errors">Errors</h2>
-        <p>If any errors occur, it compiles the object that was created and the error that happend. Then it adds it as a
-            feed item to an Error Catching ticket in TD.</p>
-        <p>Along with updateing the feed item, it notifies someone through email so that nothing falls through the
-            cracks.</p>
-        <p class="tip">The email will have to be updated manually whenever responsibility for the project changes.</p>
-        <p>If there is an error with the server, not the code on the server, and Quiq does not get an immediate
-            response, it will throw an error.</p>
-        <p>Because we store our server on Heroku, under the free license, the server will go idle after 30 minutes of
-            inactivity. When Quiq sends a request to the server and it is idle, it will wake up the server and process
-            it. However, if the server takes longer than normal to boot up, Quiq will not get a response and throw and
-            error that will be emailed to every Quiq Admin. Luckily, Quiq always sends an additional request if there
-            was a problem so if the server does take a little bit to boot up, it can create a ticket on the second
-            request. This will send an email saying something along the lines "{{HTTP METHOD}} {{SERVER URL}} timed
-            out."</p>
+        <p>Errors are thrown and caught by the program via the <code>TD Exception</code> class.</p>
+        <p>There are two different implications of a thrown error depending on how it is caught:</p>
+        <ul>
+            <li>Caught by <code>TicketerController</code> class: error is unrecoverable and no ticket will be created.</li>
+            <li>Caught within thrown function: error is recoverable and a ticket will still be created.</li>
+        </ul>
+        <p>Make sure you understand the implications and repercusions of both methods and use them appropriately.</p>
+        <h2 class="content-section" id="logging">Logging</h2>
+        <p>Wherever an exception is caught, there should be an instance of the 
+            <a href="https://docs.oracle.com/javase/7/docs/api/java/util/logging/Logger.html" target="_blank">Java Logger</a> class present.
+            Inside the catch clause, the logger class should log a message with the appropriate 
+            <a href="https://docs.oracle.com/javase/7/docs/api/java/util/logging/Level.html" target="_blank">logging level</a> (typically <code>WARNING</code>
+            for errors).
+        </p>
         <h2 class="content-section" id="debugging">Debugging</h2>
-        <p>If debugging is necessary, there is an endpoint that will send information to the client so that you can view
-            it through the console which is arguably better to use than the command line. However, before any
-            version/update is pushed to the server, any debugging methods need to be either deleted or commented out so
-            that no sensitive information gets exposed to the wild.</p>
+        <p>If you need to debug the program, please use IntelliJ's built-in 
+            <a href="https://www.jetbrains.com/help/idea/debugging-code.html" target="_blank">debugger</a>. Set 
+            <a href="https://www.jetbrains.com/help/idea/using-breakpoints.html" target="_blank">breakpoints</a>
+            in various sections of the code and use print statements to find where errors are occurring.</p>
+        <p>Once an error has been found, fix the code and write a test to assert that the error will not occur again.</p>
         <h1 class="content-heading">Creating The Ticket</h1>
         <hr>
         <h2 class="content-section" id="building">Building</h2>
