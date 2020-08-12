@@ -27,8 +27,9 @@
         <a class="nav-link" href="#concepts">Concepts</a>
         <h3 class="nav-heading">Overview</h3>
         <a class="nav-link" href="#controller">Controller</a>
-        <a class="nav-link" href="#executing">Executing</a>
+        <a class="nav-link" href="#execution">Execution</a>
         <a class="nav-link" href="#errors">Errors</a>
+        <a class="nav-link" href="#npes">NPEs</a>
         <a class="nav-link" href="#logging">Logging</a>
         <a class="nav-link" href="#debugging">Debugging</a>
         <h3 class="nav-heading">Creating the Ticket</h3>
@@ -48,7 +49,7 @@
         <hr>
         <h2 class="content-section" id="technologies">Technologies</h2>
         <p>The Quiq Ticketer program is a Java web server that utilizes the <a href="https://spring.io/guides/gs/spring-boot/" target="_blank">Spring Boot</a> framework.
-            The Spring Boot framework was chosen because of its simplicity and ease of use for initializing web servers.</p>
+            The Spring Boot framework was chosen because of its simplicity, ease of use for initializing web servers, and compatability with Heroku.</p>
         <p>The build tool used for this program is <a href="https://gradle.org/" target="_blank">Gradle</a>. Gradle was chosen over 
             <a href="https://maven.apache.org/" target="_blank">Maven</a> as the build tool because of its simplicity of use and since 
             it generally builds projects faster than Maven.</p> <p>The code is stored on <a href="https://github.com/" target="_blank">Github</a> and then deployed on <a
@@ -74,6 +75,8 @@
         <ul>
             <li><a href="https://en.wikipedia.org/wiki/Java_%28programming_language%29" target="_blank">Java programming</a> 
                 (especially the <a href="https://en.wikipedia.org/wiki/Java_%28programming_language%29#Execution_system" target="_blank">execution system</a> section)</li> 
+            <li><a href="https://developers.goquiq.com/api/docs#operation/Webhook%20-%20ConversationStatusChanged" target="_blank">Quiq ConversationStatusChanged</a> 
+                webhook data object</li>
                 <li><a href="https://en.wikipedia.org/wiki/Object-oriented_programming" target="_blank">Object-Orientated Programming</a> (OOP)</li> 
             <li><a href="https://en.wikipedia.org/wiki/Representational_state_transfer" target="_blank">REST architecture</a></li> 
             <li><a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller" target="_blank">MVC architecture</a></li> 
@@ -138,6 +141,13 @@
             <li>Caught within thrown function: error is recoverable and a ticket will still be created.</li>
         </ul>
         <p>Make sure you understand the implications and repercusions of both methods and use them appropriately.</p>
+        <h2 class="content-section" id="npes">Null Pointer Exceptions (NPEs)</h2>
+        <p>Inside the <code>QuiqParser</code> class, for example, there is a lot of <code>NULL</code> checking. This is necessary because it is not
+        known at runtime what webhook data will be populated or not.</p>
+        <p>For example, the <code>QuiqConversationData</code> object has a <code>custom map</code>. Depending on the incoming webhook data, this <code>map</code>
+        may or may not exist. Therefore it is necessary to ensure it's non-null before deferencing it (retrieving a value from a key). This <code>NULL</code>
+        checking is a bit gratuitous but necessary to ensure that an NPE does not occurr. NPEs result in live chat tickets not being created, so a minor trade-off
+        in readability for a bit more security is almost always worth it.</p>
         <h2 class="content-section" id="logging">Logging</h2>
         <p>Wherever an exception is caught, there should be an instance of the 
             <a href="https://docs.oracle.com/javase/7/docs/api/java/util/logging/Logger.html" target="_blank">Java Logger</a> class present.
