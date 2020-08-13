@@ -161,15 +161,18 @@
             <a href="https://www.jetbrains.com/help/idea/using-breakpoints.html" target="_blank">breakpoints</a>
             in various sections of the code and use print statements to find where errors are occurring.</p>
         <p>Once an error has been found, fix the code and write a test to assert that the error will not occur again.</p>
-        <h1 class="content-heading">Creating The Ticket</h1>
+        <h1 class="content-heading">Creating the Ticket</h1>
         <hr>
-        <h2 class="content-section" id="building">Building</h2>
-        <p>After the server gets the request, the BSC Robot logs into TD and then starts building the ticket.</p>
-        <h3>buildTicket()</h3>
-        <p>Compiles all the necessary components to publish the ticket object to TD. It also parses and combines the
-            transcript into the comments, as well as specify what application the ticket should belong in, along with
-            the application specific attributes, such as status, type, form, etc. It also sets the Requestor based on
-            the email that the agent put in.</p>
+        <h2 class="content-section" id="building">QuiqParser</h2>
+        <p>After retrieving and authenticating the request, the data is sent through <code>QuiqParser</code> class to extract the necessary data.</p>
+        <h3>getTeamDynamixData()</h3>
+        <p>Takes the <code>QuiqConversationData</code> and extracts/manipulates the necessary information needed to build a TeamDynamix ticket.
+        However, a <code>TeamDynamixData</code> object is returned, <b>NOT</b> a TeamDynamix ticket. This is because, depending on the type of ticket,
+        additional information from TeamDynamix needs to be retrieved to build the actual ticket.</p>
+        <p class="tab"><i>Returns: <code>TeamDynamixData</code></i></p>
+        <p class="tip">Essentially the driver method for the class.</p>
+        <h3>initializeTeamDynamixData()</h3>
+        <p>According to the department, initialize the associated <code>TeamDynamixData</code> subclass.</p>
         <table>
             <thead>
                 <tr>
@@ -180,67 +183,27 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><code>obj</code></td>
-                    <td>Object</td>
-                    <td>The request body that we get from Quiq. It should contain all the information from the
-                        engagement that we need to build the ticket.</td>
+                    <td><code>teamDynamix</code></td>
+                    <td>TeamDynamix</td>
+                    <td>Used to initialize <code>TeamDynamixData</code> subclasses since some of them need to make calls to the TeamDynamix API.</td>
+                </tr>
+                <tr>
+                    <td><code>department</code></td>
+                    <td>enum</td>
+                    <td>One of the enumerated departments used to determine which <code>TeamDynamixData</code> subclass to initialize.</td>
                 </tr>
             </tbody>
         </table>
-        <p class="tab"><i>Returns: Object</i></p>
-        <p class="tip">It returns an object with two keys, one is the ticket, the other is the application ID.</p>
-        <p>Inside the <code>buildTicket()</code> function, it calls two other functions, <code>getApplication()</code>
-            and <code>getSource()</code></p>
-        <h3>getApplication()</h3>
-        <p>Based on the application that the agent has specified, it builds a partial to help with the overall ticket.
-        </p>
-        <table>
-            <thead>
-                <tr>
-                    <th>Parameters</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><code>tag</code></td>
-                    <td>String</td>
-                    <td>The tag that the agent specified.</td>
-                </tr>
-                <tr>
-                    <td><code>agentName</code></td>
-                    <td>String</td>
-                    <td>The name of the agent who completed the chat.</td>
-                </tr>
-                <tr>
-                    <td><code>level2</code></td>
-                    <td>String</td>
-                    <td>Whether the ticket should be sent to Level 2 or not; Yes/No.</td>
-                </tr>
-            </tbody>
-        </table>
-        <p class="tab"><i>Returns: Object</i></p>
-        <h3>getSource()</h3>
-        <p>Determines which source the chat came from: SMS, Facebook, or a regular Chat.</p>
-        <table>
-            <thead>
-                <tr>
-                    <th>Parameters</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><code>quiqSource</code></td>
-                    <td>String</td>
-                    <td>The source that the customer chatted in through.</td>
-                </tr>
-            </tbody>
-        </table>
-        <p class="tab"><i>Returns: Number</i></p>
-        <p>After everything is complied, that data gets fed into the ticket object and is sent off to TD.</p>
+        <p class="tab"><i>Returns: <code>TeamDynamixData</code></i></p>
+        <h3>getFirstName()</h3>
+        <p>Retrieves the customer's first name if it exists. Otherwise, an empty string is returned.</p>
+        <p class="tab"><i>Returns: String</i></p>
+        <h3>getLastName()</h3>
+        <p>Retrieves the customer's last name if it exists. Otherwise, an empty string is returned.</p>
+        <p class="tab"><i>Returns: String</i></p>
+        <h3>getRequestorEmail()</h3>
+        <p>Retrieves the customer's email address if it exists. Otherwise, an empty string is returned.</p>
+        <p class="tab"><i>Returns: String</i></p>
         <h1 class="content-heading">Classes</h1>
         <hr>
         <h2 class="content-section" id="application">Application</h2>
