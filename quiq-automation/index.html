@@ -32,8 +32,8 @@
         <a class="nav-link" href="#npes">NPEs</a>
         <a class="nav-link" href="#logging">Logging</a>
         <a class="nav-link" href="#debugging">Debugging</a>
-        <h3 class="nav-heading">Creating the Ticket</h3>
-        <a class="nav-link" href="#building">Building</a>
+        <h3 class="nav-heading">Data Parsing</h3>
+        <a class="nav-link" href="#quiqParser">QuiqParser</a>
         <h3 class="nav-heading">Classes</h3>
         <a class="nav-link" href="#application">Application</a>
         <h3 class="nav-heading">External Resources</h3>
@@ -161,9 +161,9 @@
             <a href="https://www.jetbrains.com/help/idea/using-breakpoints.html" target="_blank">breakpoints</a>
             in various sections of the code and use print statements to find where errors are occurring.</p>
         <p>Once an error has been found, fix the code and write a test to assert that the error will not occur again.</p>
-        <h1 class="content-heading">Creating the Ticket</h1>
+        <h1 class="content-heading">Data Parsing</h1>
         <hr>
-        <h2 class="content-section" id="building">QuiqParser</h2>
+        <h2 class="content-section" id="quiqParser">QuiqParser</h2>
         <p>After retrieving and authenticating the request, the data is sent through <code>QuiqParser</code> class to extract the necessary data.</p>
         <h3>getTeamDynamixData()</h3>
         <p>Takes the <code>QuiqConversationData</code> and extracts/manipulates the necessary information needed to build a TeamDynamix ticket.
@@ -204,6 +204,116 @@
         <h3>getRequestorEmail()</h3>
         <p>Retrieves the customer's email address if it exists. Otherwise, an empty string is returned.</p>
         <p class="tab"><i>Returns: String</i></p>
+        <h3>getKbArticle()</h3>
+        <p>Retrieves the KB (Knowledge Base) article (<code>kBArticle</code>) from the <code>custom map</code> if it exists. Otherwise, the following string is returned: "None".</p>
+        <p class="tab"><i>Returns: String</i></p>
+        <h3>getAgentName()</h3>
+        <p>Retrieves the agent name (<code>agent_name</code>) from the <code>custom map</code> if it exists. Otherwise, the following string is returned: "BSC Agent".</p>
+        <p class="tab"><i>Returns: String</i></p>
+        <h3>setSentToLevel2AndStatusIds()</h3>
+        <p>According to the value of the <code>sentToLevel2</code> key from the <code>custom map</code>, set the TeamDynamix status ID and Sent To Level 2 value.</p>
+        <p class="tab"><i>Returns: void</i></p>
+        <h3>getSentToLevel2()</h3>
+        <p>Retrieve the <code>sentToLevel2</code> value from the <code>custom map</code>, if it exists. Return <code>"No"</code> otherwise. The only
+        possible value are <code>"Yes"</code> or <code>"No"</code>. </p>
+        <p class="tab"><i>Returns: String</i></p>
+        <h3>getLastNameInitial()</h3>
+        <p>Retrieves and lowercases the <code>lastNameInitialForFinancialAidQuestions</code> value from the <b>customer's</b> <code>custom map</code>, if it exists. 
+        If that key does not exist in the customer's <code>custom map</code>, then an attempt is made to retrieve first letter of the customer's last name and lowercase it.
+        If both of these values do not exist, then a lowercase <code>"a"</code> is returned by default.</p>
+        <p class="tab"><i>Returns: String</i></p>
+        <h3>chatStartedWithinOfficeHours()</h3>
+        <p>According to the chat's <code>startTime</code>, true is only returned if the chat started within the hours of 7 a.m. through 10 p.m. (the BSC's hours of operation). Otherwise,
+        false is returned.</p>
+        <p class="tab"><i>Returns: boolean</i></p>
+        <h3>chatDurationIsLessThan24Hours()</h3>
+        <p>The <code>endTime</code> is subtracted from the <code>startTime</code> to determine if the chat duration was less 24 hours (in minutes). The <code>conversationTime</code> is tested to see
+        if it is also less than 24 hours (in minutes). Returns true if both values are less than 24 hours (in minutes), false otherwise.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Parameters</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>conversationTime</code></td>
+                    <td>String</td>
+                    <td>Used to determine if the duration of the chat lasted less than 24 hours.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="tab"><i>Returns: boolean</i></p>
+        <h3>validChatStartAndEndTimes()</h3>
+        <p>Returns the results of both <code>chatStartedWithinOfficeHours()</code> and <code>chatDurationIsLessThan24Hours()</code>. Returns true if both functions return true, false otherwise.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Parameters</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>conversationTime</code></td>
+                    <td>String</td>
+                    <td>Used to determine if the duration of the chat lasted less than 24 hours.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="tab"><i>Returns: boolean</i></p>
+        <h3>getAgents()</h3>
+        <p>Returns an <code>ArrayList&lt;String&gt;</code> containing the agents that handled the chat. If the chat was not transferred to another department (or agent), then a list with only the <code>agent_name</code>
+        from the <code>custom map</code> is returned. If the chat was transferred, then all of the live chat messages are looped through and a list of all of the unique agent names (not including the system) are obtained
+        and returned.</p>
+        <p class="tab"><i>Returns: ArrayList&lt;String&gt;</i></p>
+        <h3>getTranscript()</h3>
+        <p>The Quiq messages are looped through to build a chat transcript that is later used for the ticket description.</p>
+        <p class="tab"><i>Returns: String</i></p>
+        <h3>chatWasTransferred()</h3>
+        <p>Returns true if the <code>numberOfAcceptedTransfers</code> is greater than zero, false otherwise.</p>
+        <p class="tab"><i>Returns: boolean</i></p>
+        <h3>abandonedChat()</h3>
+        <p>The Quiq messages are looped through until the first message sent by an agent if found. Once found, the messages continue to be looped through. If a customer sent a message after this first agent
+            message was sent, then the chat was not abandoned and false is returned. If a customer never sent a message after the first agent message, then the chat was abandoned and true is returned.</p>
+        <p class="tab"><i>Returns: boolean</i></p>
+        <h3>getCustomerPlatformSource()</h3>
+        <p>According to the value of the <code>customerPlatformSource</code>, the associated TeamDynamix Source ID is returned.</p>
+        <p class="tab"><i>Returns: int</i></p>
+        <h3>getTag()</h3>
+        <p>According to the value of the <code>tag</code> from the <code>custom map</code>, extract everything from the <code>tag</code> excluding the prefix (i.e. <code>"(FA)"</code>). So 
+            <code>"(FA) Office Information"</code> would become <code>"Office Information"</code>. If the <code>tag</code> does not exist in the <code>custom map</code>, then return the following string:
+            <code>"Tag Not Found"</code>. The only other special case is if the <code>tag</code> equals <code>"Pathway"</code> in which case the string <code>"LiveChat"</code> is returned. This is because
+        the Live Chat Pathway form doesn't really have a central tag, so the <code>Method of Contact</code> attribute substitutes as the central tag.</p>
+        <p class="tab"><i>Returns: String</i></p>
+        <h3>getDepartment()</h3>
+        <p>According to the value of the <code>tag</code> from the <code>custom map</code>, extract only the prefix from the <code>tag</code> (i.e. <code>"(FA)"</code>). So 
+            <code>"(FA) Office Information"</code> would become <code>"(FA)"</code>. If the <code>tag</code> does not exist in the <code>custom map</code>, then return the following Department:
+            <code>GENERAL</code>. Otherwise, use the <code>tag</code> prefix to determine the correct Department to return.</p>
+        <p class="tab"><i>Returns: enum</i></p>
+        <h3>getConversationTime()</h3>
+        <p>By multiplying the average duration of a message by how many messages were sent, an average can be created that represents how long the conversation lasted (conversationTime). This 
+            is done for both the customer and agent and the two values are then averaged together to get an estimation of the conversationTime. The number is converted to a string since that is the
+            necessary format used later in the program.</p>
+        <p class="tab"><i>Returns: String</i></p>
+        <h3>getWaitTime()</h3>
+        <p>Retrieve the <code>initialAgentResponseDuration</code>, convert it to minutes, then convert it to a string.</p>
+        <p class="tab"><i>Returns: String</i></p>
+        <h3>getWorkTime()</h3>
+        <p>Retrieve the <code>workTime</code>, convert it to minutes, then convert it to a string.</p>
+        <p class="tab"><i>Returns: String</i></p>
+        <h3>getAgentMessages()</h3>
+        <p>Retrieves the <code>numberOfAgentMessages</code> and then converts it to a string.</p>
+        <p class="tab"><i>Returns: String</i></p>
+        <h3>getCustomerMessages()</h3>
+        <p>Retrieves the <code>numberOfCustomerMessages</code> and then converts it to a string.</p>
+        <p class="tab"><i>Returns: String</i></p>
+        <h3>getData()</h3>
+        <p>Retrieves the <code>QuiqConversationData</code> object (getter for testing purposes).</p>
+        <p class="tab"><i>Returns: QuiqConversationData</i></p>
         <h1 class="content-heading">Classes</h1>
         <hr>
         <h2 class="content-section" id="application">Application</h2>
