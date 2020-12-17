@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --heading-font: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    --body-font: "Trebuchet MS", Helvetica, sans-serif;
+    --accent: #69306d;
+    --link-visited: #2ec4b6;
+    --secondary: #0e103d;
+    --background: #fff;
+    --sub-accent: #e7e7e7;
+    --outline: #9f7e69;
+}
+
+pre code.code-block {
+    background-color: #eee;
+    border: 1px solid #999;
+    display: inline-block;
+    padding: 20px;
+}
+
+code.inline-code-block {
+    background-color: #eee;
+    border: 1px solid #999;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 3px;
+}

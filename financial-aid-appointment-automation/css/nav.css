@@ -1,0 +1,32 @@
+nav {
+    position: fixed;
+    top: 0;
+    width: 200px;
+    height: 100%;
+    font-family: var(--heading-font);
+    display: flex;
+    flex-direction: column;
+    border-right: 2px solid #111;
+    z-index: -1;
+    background-color: var(--background);
+}
+
+nav h3.nav-heading {
+    color: var(--secondary);
+    margin-bottom: 5px;
+    padding-left: 10px;
+}
+nav a {
+    padding-left: 20px;
+    color: var(--dark-grey);
+    text-decoration: none;
+}
+nav a:hover {
+    background-color: var(--sub-accent);
+}
+
+nav a.active {
+    border-right: 5px solid var(--accent);
+    font-weight: bold;
+    color: var(--accent);
+}

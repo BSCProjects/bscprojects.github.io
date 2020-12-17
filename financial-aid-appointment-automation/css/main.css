@@ -1,0 +1,106 @@
+main {
+    position: absolute;
+    left: 200px;
+    padding: 0 20px;
+    font-family: var(--body-font);
+    width: calc(100% - 200px);
+    background-color: var(--background);
+    margin-bottom: 100px;
+}
+
+main h1, main h2, main h3 {
+    color: var(--secondary);
+}
+
+main h1.content-heading {
+    font-family: var(--heading-font);
+}
+
+main h3 {
+    filter: opacity(70%);
+}
+
+main hr {
+    width: 100%;
+    border-color: var(--accent);
+    border-width: 5px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+main a {
+    color: var(--outline);
+}
+main a:hover, main a:visited {
+    color: var(--link-visited);
+}
+
+main .tip {
+    border-left: 5px solid var(--outline);
+    background-color: var(--sub-accent);
+    padding: 5px;
+    margin: 10px 0 10px 20px;
+}
+
+/* Code Section */
+main table {
+    width: 100%;
+    border: 1px solid lightgrey;
+    border-collapse: collapse;
+}
+main table thead tr {
+    background-color: lightgrey;
+}
+main table tbody tr:hover {
+    background-color: var(--sub-accent);
+}
+main table th {
+    text-align: left;
+}
+main table th:nth-child(1) {
+    width: 15%;
+}
+main table th:nth-child(2) {
+    width: 15%;
+}
+main table th, main table td {
+    padding: 10px 5px;
+    border-bottom: 1px solid lightgrey;
+}
+main table code {
+    font-size: 1.15em;
+}
+
+main .code-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+main .code-card {
+    background-color: var(--secondary);
+    color: var(--background);
+    padding: 5px;
+    border: 2px solid var(--outline);
+    width: 100%;
+}
+
+main .flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+main code span {
+    margin: 2.5px 0;
+}
+
+main .tab {
+    margin-left: 1.15em;
+}
+main .tab.two {
+    margin-left: 2.15em;
+}
+main .tab.three {
+    margin-left: 3.15em;
+}

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<header>
+    <h1 id="header">Financial Aid Appointment Automation Program</h1>
+    <a href="../index.html">BSC Projects</a>
+</header>
+<nav>
+    <br>
+    <a class="nav-link active" href="#header">Top &uarr;</a>
+
+    <h3 class="nav-heading">Pre-Requisites</h3>
+    <a class="nav-link" href="#technologies">Technologies</a>
+    <a class="nav-link" href="#setup">Setup</a>
+    <a class="nav-link" href="#run-program">Run the Program</a>
+
+    <h3 class="nav-heading">Introduction</h3>
+    <a class="nav-link" href="#background">Background</a>
+    <a class="nav-link" href="#purpose">Purpose</a>
+    <a class="nav-link" href="Javadocs/allpackages-index.html" target="_blank">Javadocs</a>
+
+</nav>
+<main>
+    <h1 class="content-heading">Pre-Requisites</h1>
+    <hr>
+    <h2 class="content-section" id="technologies">Technologies</h2>
+    <p>
+        The Financial Aid Appointment Automation program is a Java web server that utilizes the <a href="https://spring.io/guides/gs/spring-boot/" target="_blank">Spring Boot</a> framework.
+        The Spring Boot framework was chosen because of its simplicity, ease of use for initializing web servers, and compatability with Heroku.
+    </p>
+    <p>
+        The build tool used for this program is <a href="https://gradle.org/" target="_blank">Gradle</a>. Gradle was chosen over
+        <a href="https://maven.apache.org/" target="_blank">Maven</a> as the build tool because of its simplicity of use and since
+        it generally builds projects faster than Maven.</p> <p>The code is stored on <a href="https://github.com/" target="_blank">Github</a> and then deployed on <a
+            href="https://heroku.com" target="_blank">Heroku</a>.
+    </p>
+    <h2 class="content-section" id="setup">Setup</h2>
+    <p>
+        In order to work on this project, You will need to install a few things:
+    </p>
+    <ul>
+        <li><a href="https://www.jetbrains.com/idea/" target="_blank">IntelliJ Ultimate</a>
+            (apply for a <a href="https://www.jetbrains.com/community/education/#students" target="_blank">free educational license</a> as a student)</li>
+        <li><a href="https://git-scm.com/downloads" target="_blank">Git</a></li>
+        <li><a href="https://www.oracle.com/java/technologies/java-archive-javase10-downloads.html" target="_blank">Java 10 JDK</a> (or newer)</li>
+        <li><a href="https://gradle.org/install/" target="_blank">Gradle</a> (follow the tutorial)</li>
+        <li><a href="https://devcenter.heroku.com/articles/heroku-cli" target="_blank">Heroku CLI</a></li>
+        <li>The following environment variables. The values of these variables can be found on the Heroku page. Navigate
+            to the <b>"Settings"</b> tab and look under the <b>Config Vars</b> to view their values. If you have trouble
+            finding them, please ask a co-worker about their location.
+            <br>
+            <ol>
+                <li> BSC_GH_TOKEN </li>
+                <li> COMMUNITY_MEMBER_UNKNOWN_UID </li>
+                <li> SPECIAL_TOKEN </li>
+                <li> SPREADSHEET_ID </li>
+                <li> TD_API_BASE_URL </li>
+                <li> USERNAME </li>
+                <li> PASSWORD </li>
+            </ol>
+            <br>
+        </li>
+    </ul>
+    <p>
+        Once you have those things, you will need to add yourself as a collaborator to the project on Github and then
+        you can clone it onto your local machine. From there you can do whatever you need to do. <b>Make sure to put your proposed changes on a separate branch!</b>
+    </p>
+
+    <h2 class="content-section" id="run-program">Run the Program</h2>
+    <p>
+        After the program is up and running, it will be waiting for web traffic to execute the program. The following
+        commands will run the program via a <code class="inline-code-block">curl</code> command.
+        <code class="inline-code-block">curl</code> sends a <code class="inline-code-block">GET</code> web
+        request by default. for more information about <code class="inline-code-block">curl</code>
+        follow this <a href="https://linux.die.net/man/1/curl" target="_blank">link</a>.
+        Please be mindful when running this program as it creates real tickets in TeamDynamix. If you create tickets,
+        please delete them after you are done with them.
+        <br><br>
+        To execute the program that live on Heroku, use the following command in your terminal.
+        <br><br>
+        <code class="code-block">
+            <pre>$ curl https://daily-data-temp.herokuapp.com/executeProgram?special_token={special_token}</pre>
+        </code>
+        <br><br>
+        To execute the program if the SpringBoot application is running on our local machine, use the following command
+        in your terminal.
+        <br><br>
+    </p>
+    <p>
+        <code class="code-block">
+            <pre>$ curl localhost:8080/executeProgram?special_token={special_token}</pre>
+        </code>
+    </p>
+    <h1 class="content-heading">Introduction</h1>
+    <hr>
+    <h2 class="content-section" id="background">Background</h2>
+    <p>
+        The Financial Aid Office came up with a new way for students to meet with a Financial Aid Advisor via <i>Zoom</i> among
+        the Covid-19 pandemic. Students who call in to visit with said Financial Aid Advisor create an appointment with the
+        agent on the call. After the appointment is made a confirmation email with a <i>Zoom</i> link is sent to the student. At
+        the appointed time the student uses that <i>Zoom</i> link to speak with the Financial Aid Advisor. After the appointment,
+        the Financial Aid Advisor closes the ticket. This event of closing the ticket triggers a survey to be sent to the
+        student 1 day after the ticket close event is caught. For more information about what this process entails, read the KB
+        article entitled <a href="https://td.byui.edu/TDClient/75/Portal/KB/ArticleDet?ID=7486" target="_blank">Financial Aid / Appointments (BSC Phones Agents Only)</a>
+    </p>
+
+    <h2 class="content-section" id="purpose">Purpose</h2>
+    <p>
+        This program creates 4 tickets per 1 appointment time. The tickets represent the appointments and hold the date and time the appointment
+        will take place at. The created tickets can be viewed and accessed from a report in the Financial Aid Application called
+        <a href="https://td.byui.edu/TDNext/Apps/53/Reporting/ReportViewer?ReportID=DVgfPFZHyGc_&RunNow=1" target="_blank">Available Financial Aid Appointments.</a>
+        The scheduled appointments, denoted by having the student who called in being the requester,
+        can be found in the Financial Aid Application in the report called <a href="https://td.byui.edu/TDNext/Apps/53/Reporting/ReportViewer?ReportID=MKEXZzjPP9Q_&RunNow=1" target="_blank">Financial Aid Appointments</a>.
+    </p>
+    <h2 class="content-section" id="javadoc">Javadocs</h2>
+    <p>
+        For a full list and explanation of functions, classes, and packages, please refer to the <a href="Javadocs/allpackages-index.html" target="_blank">Javadocs</a>.
+    </p>
+    <h1 class="content-heading">The Program</h1>
+    <hr>
+    <h2 class="content-section" id="program-flow">Execution Flow</h2>
+    <p>
+        A SpringBoot application begins in the class annotated with the <code class="inline-code-block">@SpringBootApplication</code> annotation.
+        <code class="code-block">
+            <pre>
+@SpringBootApplication
+public class MainApplication {
+
+//Class code
+
+}
+            </pre>
+        </code>
+    </p>
+    <p>
+        From here the application calls <code class="inline-code-block">main()</code> just like any other java program. The unique thing about
+        a SpringBoot Application is the application is officially begun once the static function <code class="inline-code-block">SpringApplication.run()</code>
+        is called. More information on a Spring application is found <a href="https://spring.io/guides/gs/spring-boot/" target="_blank">HERE</a>.
+
+        <code class="code-block">
+            <pre>
+@SpringBootApplication
+public class MainApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(MainApplication.class, args);
+    }
+}
+            </pre>
+        </code>
+    </p>
+    <p>
+        There is also another function that returns a <code class="inline-code-block">CommandLineRunner</code>. Basically a
+        CommandLineRunner is an interface that has a <code class="inline-code-block">run()</code> method which executes code before the application
+        is fully up and running. Our lambda function attached to the <code class="inline-code-block">CommandLineRunner</code> is empty so this can be
+        ignored. The <code class="inline-code-block">ApplicationContext</code> object would allow you access to various
+        other things if so needed. You can mess around with it on your local machine if you wish.
+
+        <code class="code-block">
+            <pre>
+@SpringBootApplication
+public class MainApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(MainApplication.class, args);
+    }
+
+    @Bean
+    public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
+        return args -> {
+        };
+    }
+}
+            </pre>
+        </code>
+    </p>
+
+    <p>
+        Once the application is up and running, the class annoted with <code class="inline-code-block">@RestController</code>
+        controls the traffic encountered by the application.
+        <code class="code-block">
+            <pre>
+@RestController
+public class Main {
+
+  //Class code
+
+}
+            </pre>
+        </code>
+    </p>
+    <p>
+        The application knows where to map the traffic based on which function is annotated with the
+        <code class="inline-code-block">@RequestMapping</code> annotation. More information on this annotation can be
+        found <a href="https://www.baeldung.com/spring-requestmapping" target="_blank">HERE</a>. The following example
+        has the function <code class="inline-code-block">home()</code> handling the traffic with the default URL.
+        <code class="code-block">
+            <pre>
+@RestController
+public class Main {
+
+    @RequestMapping("/")
+    public String home() {
+        return "hello";
+    }
+
+}
+            </pre>
+        </code>
+    </p>
+    <p>
+        With the program running locally, the following <code class="inline-code-block">curl</code> command will be
+        handled by <code class="inline-code-block">home()</code>.
+        <code class="code-block">
+            <pre>$ curl localhost:8080/</pre>
+        </code>
+    </p>
+
+    <p>
+        A more complex example is where the needed functionality of the program lies.
+        <code class="inline-code-block">runProgram()</code> receives and handles the traffic with the URL
+        <code class="inline-code-block">/executeProgram</code>. You'll notice that there are some parameters in this
+        mapping. These parameters are assigned to a variable in the parameters of the function with the annotation
+        <code class="inline-code-block">@RequestParam(value = "param_name")</code>. In this case, the param
+        <code class="inline-code-block">String special_token"</code> is assigned the value denoted by the
+        <code class="inline-code-block">params = {"special_token"}</code>.
+        <code class="code-block">
+            <pre>
+ @RestController
+public class Main {
+
+    @RequestMapping("/")
+    public String home() {
+        return "hello";
+    }
+
+  @RequestMapping(value = "/executeProgram", params = {"special_token"})
+    public @ResponseBody String runProgram(@RequestParam(value = "special_token") String special_token) throws IOException {
+
+    //Code here
+
+}
+            </pre>
+        </code>
+    </p>
+    <p>
+        The <code class="inline-code-block">curl</code> command that would trigger <code class="inline-code-block">runProgram()</code>
+        is the same one that executes the program listed in the <a href="#run-program">Run The Program</a> section with
+        the program running locally.
+        <code class="code-block">
+            <pre>$ curl localhost:8080/executeProgram?special_token={special_token}</pre>
+        </code>
+    </p>
+</main>
+</body>
+</html>
