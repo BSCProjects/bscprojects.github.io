@@ -28,6 +28,7 @@
     <h3 class="nav-heading">Introduction</h3>
     <a class="nav-link" href="#background">Background</a>
     <a class="nav-link" href="#purpose">Purpose</a>
+    <a class="nav-link" href="Javadocs/allpackages-index.html" target="_blank">Javadocs</a>
 
 </nav>
 <main>
@@ -122,7 +123,10 @@
         The scheduled appointments, denoted by having the student who called in being the requester,
         can be found in the Financial Aid Application in the report called <a href="https://td.byui.edu/TDNext/Apps/53/Reporting/ReportViewer?ReportID=MKEXZzjPP9Q_&RunNow=1" target="_blank">Financial Aid Appointments</a>.
     </p>
-
+    <h2 class="content-section" id="javadoc">Javadocs</h2>
+    <p>
+        For a full list and explanation of functions, classes, and packages, please refer to the <a href="Javadocs/allpackages-index.html" target="_blank">Javadocs</a>.
+    </p>
     <h1 class="content-heading">The Program</h1>
     <hr>
     <h2 class="content-section" id="program-flow">Execution Flow</h2>
@@ -228,7 +232,7 @@ public class Main {
         <code class="inline-code-block">runProgram()</code> receives and handles the traffic with the URL
         <code class="inline-code-block">/executeProgram</code>. You'll notice that there are some parameters in this
         mapping. These parameters are assigned to a variable in the parameters of the function with the annotation
-        <code class="inline-code-block">@RequestParam(value = "param_name")</code>. In this case, the parm
+        <code class="inline-code-block">@RequestParam(value = "param_name")</code>. In this case, the param
         <code class="inline-code-block">String special_token"</code> is assigned the value denoted by the
         <code class="inline-code-block">params = {"special_token"}</code>.
         <code class="code-block">
